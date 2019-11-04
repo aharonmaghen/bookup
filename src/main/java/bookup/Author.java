@@ -1,6 +1,6 @@
 package bookup;
 
-/** Stores author information  */
+/** Stores author information */
 class Author {
 
 	private String firstName;

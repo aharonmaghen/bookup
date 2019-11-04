@@ -7,6 +7,7 @@ class Book {
 	Author author;
 	private int pages;
 	private int year;
+	URL imageURL;
 
 	public Book(String ISBN) {
 		this.ISBN = ISBN;
@@ -32,8 +33,9 @@ class Book {
 	public Author getAuthor() {
 		return author;
 	}
-	public void setAuthor() {
+	public void setAuthor(String firstName) {
 		this.author = new Author();
+		this.firstName = firstName;
 	}
 	public void setAuthor(String firstName, String lastName, String middleInitial) {
 		this.author = new Author(firstName, lastName, middleInitial);
@@ -43,7 +45,7 @@ class Book {
 	public int getPages() {
 		return pages;
 	}
-	public void setPages() {
+	public void setPages(int pages) {
 		this.pages = pages;
 	}
 
@@ -51,8 +53,16 @@ class Book {
 	public int getYear() {
 		return year;
 	}
-	public void setYear() {
+	public void setYear(int year) {
 		this.year = year;
+	}
+
+	// year getter/setter
+	public URL getImageURL() {
+		return imageURL;
+	}
+	public void setImageURL(URL url) {
+		this.imageURL = new URL(url);
 	}
 
 	@Override
