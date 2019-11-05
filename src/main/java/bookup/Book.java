@@ -1,4 +1,5 @@
 package bookup;
+import java.net.URL;
 
 /** Represents a single Book */
 class Book {
@@ -33,8 +34,8 @@ class Book {
 		return author;
 	}
 
-	public void setAuthor(String name) {
-		this.author = new Author(name);
+	public void setAuthor(Author author) {
+		this.author = author;
 	}
 
 	public int getPages() {
@@ -58,7 +59,7 @@ class Book {
 	}
 
 	public void setImageURL(URL url) {
-		this.imageURL = new URL(url);
+		this.imageURL = url;
 	}
 
 	@Override

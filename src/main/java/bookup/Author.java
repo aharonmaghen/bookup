@@ -28,7 +28,9 @@ class Author {
 			throw new IllegalArgumentException("Object passed is not an instance of Author");
 		}
 
-		return this.name.equals(obj.name);
+		Author author = (Author)obj;
+
+		return this.name.equals(author.name);
 	}
 
 }
