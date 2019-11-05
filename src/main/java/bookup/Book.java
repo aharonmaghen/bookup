@@ -2,72 +2,68 @@ package bookup;
 
 /** Represents a single Book */
 class Book {
-	private String ISBN;
+	private String isbn;
 	private String title;
-	Author author;
+	private Author author;
 	private int pages;
 	private int year;
-	URL imageURL;
+	private URL imageURL;
 
-	public Book(String ISBN) {
-		this.ISBN = ISBN;
+	public Book(String isbn) {
+		this.isbn = isbn;
 	}
 
-	// ISBN getter/setter
-	public String getISBN() {
-		return ISBN;
-	}
-	public void setISBN(String ISBN) {
-		this.ISBN = ISBN;
+	public String getisbn() {
+		return isbn;
 	}
 
-	// title getter/setter
+	public void setisbn(String isbn) {
+		this.isbn = isbn;
+	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
-	// author getter/setter
 	public Author getAuthor() {
 		return author;
 	}
-	public void setAuthor(String firstName) {
-		this.author = new Author();
-		this.firstName = firstName;
-	}
-	public void setAuthor(String firstName, String lastName, String middleInitial) {
-		this.author = new Author(firstName, lastName, middleInitial);
+
+	public void setAuthor(String name) {
+		this.author = new Author(name);
 	}
 
-	// pages getter/setter
 	public int getPages() {
 		return pages;
 	}
+
 	public void setPages(int pages) {
 		this.pages = pages;
 	}
 
-	// year getter/setter
 	public int getYear() {
 		return year;
 	}
+
 	public void setYear(int year) {
 		this.year = year;
 	}
 
-	// year getter/setter
 	public URL getImageURL() {
 		return imageURL;
 	}
+
 	public void setImageURL(URL url) {
 		this.imageURL = new URL(url);
 	}
 
 	@Override
 	public String toString() {
-		return "ISBN: " + ISBN + "\nTITLE: " + title + "\nAUTHOR: " + author.toString() + 
+		return "ISBN: " + isbn + "\nTITLE: " + title + "\nAUTHOR: " + author + 
 		"\nPAGES: " + pages + "\nYEAR: " + year;
 	}
 
