@@ -22,13 +22,15 @@ public class BookTest {
         IMAGE_URL = new URL("http://www.example.com");
     }
 
-    @Test public void bookWithISBNConstructor() {
+    @Test
+    public void bookWithISBNConstructor() {
         Book book = new Book(ISBN);
 
         assertEquals(ISBN, book.getISBN());
     }
 
-    @Test public void book_toString() {
+    @Test
+    public void book_toString() {
         Book book = new Book(ISBN);
         book.setTitle(TITLE);
         book.setAuthor(AUTHOR);
