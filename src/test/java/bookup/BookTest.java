@@ -25,6 +25,7 @@ public class BookTest {
 
         assertEquals(ISBN, book.getISBN());
     }
+
     @Test public void book_toString() {
         Book book = new Book(ISBN);
         book.setTitle(TITLE);
