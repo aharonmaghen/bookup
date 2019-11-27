@@ -14,11 +14,11 @@ class Book {
 		this.isbn = isbn;
 	}
 
-	public String getisbn() {
+	public String getISBN() {
 		return isbn;
 	}
 
-	public void setisbn(String isbn) {
+	public void setISBN(String isbn) {
 		this.isbn = isbn;
 	}
 
@@ -64,8 +64,8 @@ class Book {
 
 	@Override
 	public String toString() {
-		return "ISBN: " + isbn + "\nTITLE: " + title + "\nAUTHOR: " + author + 
-		"\nPAGES: " + pages + "\nYEAR: " + year;
+		return String.format("ISBN: %s, Title: %s, Author: %s, Pages: %s, Year: %s, Image URL: %s",
+				isbn, title, author, pages, year, imageURL);
 	}
 
 }
