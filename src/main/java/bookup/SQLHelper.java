@@ -11,7 +11,6 @@ class SQLHelper {
         try {
             Statement statement = con.createStatement();
             String SQLAddStatement = String.format("insert into books values(%s, '%s', '%s', %s, %s, %s);", book.getISBN(), book.getTitle(), book.getAuthor(),book.getPages(), book.getYear(), book.getImageURL());
-            System.out.println(SQLAddStatement);
             statement.executeUpdate(SQLAddStatement);
         } catch (SQLException e) {
             System.out.println(e);
