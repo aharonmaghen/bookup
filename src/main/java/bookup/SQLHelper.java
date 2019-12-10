@@ -51,6 +51,11 @@ class SQLHelper {
         } catch (SQLException e) {
             System.out.println(e);
         }
+        try {
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         if (results == null) {
             return null;
         }
