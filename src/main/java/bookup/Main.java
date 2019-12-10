@@ -16,10 +16,9 @@ class Main {
 		book.setPages(150);
 		book.setYear(2017);
 
+		System.out.println(SQLHelper.getBook("1234567890"));
 
-		SQLHelper sqlHelper = new SQLHelper();
-
-		List<Book> list = sqlHelper.getBooks(book.getAuthor());
+		List<Book> list = SQLHelper.getBooks(book.getAuthor());
 		System.out.println(list);
 
 

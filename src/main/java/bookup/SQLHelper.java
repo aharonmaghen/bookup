@@ -7,16 +7,12 @@ import java.util.*;
 class SQLHelper {
 
     /** Adds specified book to database */
-    public void add(Book book) {
+    public static void add(Book book) {
         Connection con = connect();
         try {
             Statement statement = con.createStatement();
             String SQLAddStatement = String.format("insert into books values(%s, '%s', '%s', %s, %s, %s);", book.getISBN(), book.getTitle(), book.getAuthor(),book.getPages(), book.getYear(), book.getImageURL());
             statement.executeUpdate(SQLAddStatement);
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        try {
             con.close();
         } catch (SQLException e) {
             System.out.println(e);
@@ -24,46 +20,35 @@ class SQLHelper {
     }
 
     /** Returns a Book with the specified isbn or null if the book does not exist in the database */
-    public Book getBook(String isbn) {
+    public static Book getBook(String isbn) {
         Connection con = connect();
-        ResultSet results = null;
+        ResultSet results;
+        Book book = null;
         try {
             Statement statement = con.createStatement();
             results = statement.executeQuery(String.format("select * from books where isbn = %s;", isbn));
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        try {
+            book = createBook(results);
             con.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
-        return createBook(results);
+        return book;
     }
 
     /** Returns a List of books by the specified author */
-    public List<Book> getBooks(Author author){
+    public static List<Book> getBooks(Author author){
         Connection con = connect();
         ResultSet results = null;
+        List<Book> list = null;
         try {
             Statement statement = con.createStatement();
             results = statement.executeQuery(String.format("select * from books where author = '%s';", author.getName()));
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        try {
-            con.close();
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        if (results == null) {
-            return null;
-        }
-        List<Book> list = new ArrayList<>();
-        try {
+            if (results == null) { return null; }
+            list = new ArrayList<>();
             while(results.next()) {
                 list.add(createBook(results));
             }
+            con.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
