@@ -1,6 +1,7 @@
 package bookup;
 import javax.xml.transform.Result;
 import java.sql.*;
+import java.util.*;
 
 /** Provides helper methods for interacting with the database */
 class SQLHelper {
@@ -28,11 +29,40 @@ class SQLHelper {
         ResultSet results = null;
         try {
             Statement statement = con.createStatement();
-            results = statement.executeQuery(String.format("select * from books where isbn = %s", isbn));
+            results = statement.executeQuery(String.format("select * from books where isbn = %s;", isbn));
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        try {
+            con.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
         return createBook(results);
+    }
+
+    /** Returns a List of books by the specified author */
+    public List<Book> getBooks(Author author){
+        Connection con = connect();
+        ResultSet results = null;
+        try {
+            Statement statement = con.createStatement();
+            results = statement.executeQuery(String.format("select * from books where author = '%s';", author.getName()));
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        if (results == null) {
+            return null;
+        }
+        List<Book> list = new ArrayList<>();
+        try {
+            while(results.next()) {
+                list.add(createBook(results));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
     }
 
     /** Creates a Book object form the first row of a ResultSet */
@@ -40,7 +70,7 @@ class SQLHelper {
         if (results == null) return null;
         Book book = null;
         try {
-            results.next();
+            if (results.isBeforeFirst()) results.next();
             book = new Book(results.getString(1));
             book.setTitle(results.getString(2));
             book.setAuthor(new Author(results.getString(3)));

@@ -2,26 +2,26 @@ package bookup;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.*;
 
 /** Main Bookup Application */
 class Main {
 	public static void main(String[] args) {
+
 		System.out.println("Success!!!!!!!!!!");
-		Book book = new Book("987654321");
-		book.setTitle("Building Java Programs");
+
+		Book book = new Book("111111111");
+		book.setTitle("cool beans");
 		book.setAuthor(new Author("John Doe"));
-		book.setPages(267);
-		book.setYear(1998);
-		try {
-			book.setImageURL(new URL("google.com"));
-		} catch (MalformedURLException e) {
-			System.out.println(e);
-		}
-		System.out.println(book);
+		book.setPages(150);
+		book.setYear(2017);
+
 
 		SQLHelper sqlHelper = new SQLHelper();
 
-//		sqlHelper.add(book);
-		System.out.println("Fetching book with isbn = " + book.getISBN() + " -- " + sqlHelper.getBook(book.getISBN()));
+		List<Book> list = sqlHelper.getBooks(book.getAuthor());
+		System.out.println(list);
+
+
 	}
 }
