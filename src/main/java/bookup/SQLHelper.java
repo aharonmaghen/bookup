@@ -7,7 +7,7 @@ import java.util.*;
 class SQLHelper {
 
     /** Adds specified book to database */
-    public static void add(Book book) {
+    static void add(Book book) {
         Connection con = connect();
         try {
             Statement statement = con.createStatement();
@@ -20,7 +20,7 @@ class SQLHelper {
     }
 
     /** Returns a Book with the specified isbn or null if the book does not exist in the database */
-    public static Book getBook(String isbn) {
+    static Book getBook(String isbn) {
         Connection con = connect();
         ResultSet results;
         Book book = null;
@@ -36,7 +36,7 @@ class SQLHelper {
     }
 
     /** Returns a List of books by the specified author */
-    public static List<Book> getBooks(Author author){
+    static List<Book> getBooks(Author author){
         Connection con = connect();
         ResultSet results = null;
         List<Book> list = null;
