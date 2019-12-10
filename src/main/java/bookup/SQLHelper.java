@@ -11,11 +11,11 @@ class SQLHelper {
         Connection con = connect();
         try {
             Statement statement = con.createStatement();
-            String SQLAddStatement = String.format("insert into books values(%s, '%s', '%s', %s, %s, %s);", book.getISBN(), book.getTitle(), book.getAuthor(),book.getPages(), book.getYear(), book.getImageURL());
+            String SQLAddStatement = String.format("insert into books values(%s, '%s', '%s', %s, %s, '%s');", book.getISBN(), book.getTitle(), book.getAuthor(),book.getPages(), book.getYear(), book.getImageURL());
             statement.executeUpdate(SQLAddStatement);
             con.close();
         } catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -30,7 +30,7 @@ class SQLHelper {
             book = createBook(results);
             con.close();
         } catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         return book;
     }
@@ -38,7 +38,7 @@ class SQLHelper {
     /** Returns a List of books by the specified author */
     static List<Book> getBooks(Author author){
         Connection con = connect();
-        ResultSet results = null;
+        ResultSet results;
         List<Book> list = null;
         try {
             Statement statement = con.createStatement();
@@ -50,7 +50,7 @@ class SQLHelper {
             }
             con.close();
         } catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         return list;
     }
@@ -68,7 +68,7 @@ class SQLHelper {
             book.setYear(results.getInt(5));
             book.setImageURL(results.getURL(6));
         } catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         return book;
     }
@@ -80,7 +80,7 @@ class SQLHelper {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BookDatabase?useSSL=false", "root", "");
         } catch (ClassNotFoundException | SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         return con;
     }
