@@ -25,13 +25,13 @@ class Main {
 		}
 		System.out.println(test.getAuthority());
 
-		Book book = new Book("111111111");
-		book.setTitle("cool beans");
-		book.setAuthor(new Author("John Doe"));
-		book.setPages(150);
-		book.setYear(2017);
+		Book book = new Book("1234567890");
+		book.setTitle("this is a book");
+		book.setAuthor(new Author("aharon maghen"));
+		book.setPages(345);
+		book.setYear(2020);
 		try {
-			book.setImageURL(new URL("https://www.youtube.com/"));
+			book.setImageURL(new URL("https://www.linkedin.com/in/aharonmaghen"));
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -41,7 +41,7 @@ class Main {
 		System.out.println(SQLHelper.getBook("1234567890"));
 		System.out.println(SQLHelper.getBook("111111111"));
 
-		List<Book> list = SQLHelper.getBooks(book.getAuthor());
+		List<Book> list = SQLHelper.getAllBooks();
 		System.out.println(list);
 
 

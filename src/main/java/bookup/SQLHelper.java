@@ -8,31 +8,51 @@ class SQLHelper {
 
     /** Adds specified book to database */
     static void add(Book book) {
-        Connection con = connect();
         try {
+            Connection con = connect();
             Statement statement = con.createStatement();
             String SQLAddStatement = String.format("insert into books values(%s, '%s', '%s', %s, %s, '%s');", book.getISBN(), book.getTitle(), book.getAuthor(),book.getPages(), book.getYear(), book.getImageURL());
             statement.executeUpdate(SQLAddStatement);
             con.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException();
         }
     }
 
     /** Returns a Book with the specified isbn or null if the book does not exist in the database */
     static Book getBook(String isbn) {
-        Connection con = connect();
-        ResultSet results;
         Book book = null;
         try {
+            Connection con = connect();
+            ResultSet results;
             Statement statement = con.createStatement();
             results = statement.executeQuery(String.format("select * from books where isbn = %s;", isbn));
             book = createBook(results);
             con.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException();
         }
         return book;
+    }
+
+    /** Returns all the books in the database */
+    static List<Book> getAllBooks(){
+        Connection con = connect();
+        ResultSet results;
+        List<Book> list = null;
+        try {
+            Statement statement = con.createStatement();
+            results = statement.executeQuery("select * from books;");
+            if (results == null) { return null; }
+            list = new ArrayList<>();
+            while(results.next()) {
+                list.add(createBook(results));
+            }
+            con.close();
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
+        return list;
     }
 
     /** Returns a List of books by the specified author */
@@ -50,7 +70,7 @@ class SQLHelper {
             }
             con.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException();
         }
         return list;
     }
@@ -68,7 +88,7 @@ class SQLHelper {
             book.setYear(results.getInt(5));
             book.setImageURL(results.getURL(6));
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException();
         }
         return book;
     }
@@ -80,7 +100,7 @@ class SQLHelper {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BookDatabase?useSSL=false", "root", "");
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException();
         }
         return con;
     }
