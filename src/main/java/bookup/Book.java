@@ -1,8 +1,11 @@
 package bookup;
+
+import com.google.gson.annotations.SerializedName;
 import java.net.URL;
 
 /** Represents a single Book */
 class Book {
+	@SerializedName("ISBN") private IsbnObject isbnObject;
 	private String isbn;
 	private String title;
 	private Author author;
@@ -65,7 +68,12 @@ class Book {
 	@Override
 	public String toString() {
 		return String.format("ISBN: %s, Title: %s, Author: %s, Pages: %s, Year: %s, Image URL: %s",
-				isbn, title, author, pages, year, imageURL);
+				isbn, isbnObject.title, author, pages, year, imageURL);
+	}
+
+
+	private class IsbnObject {
+		private String title;
 	}
 
 }

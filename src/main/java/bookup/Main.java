@@ -1,5 +1,6 @@
 package bookup;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -45,7 +46,12 @@ class Main {
 //		System.out.println(list);
 
 	try {
-		APIHelper.get("0307157857");
+		String jsonResult = APIHelper.getJson("0307157857");
+		
+		Gson gson = new Gson();
+		Book book = gson.fromJson(jsonResult, Book.class);
+		System.out.println(book.toString());
+
 	} catch (IOException e) {
 		e.printStackTrace();
 	}

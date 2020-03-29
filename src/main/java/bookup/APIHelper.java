@@ -12,7 +12,7 @@ class APIHelper {
     /** Returns a Book object with data of the book specified by the ISBN.
      * The data is obtained form a book API.
      */
-    public static void get(String ISBN) throws IOException {
+    public static String getJson(String ISBN) throws IOException {
         URL urlForGetRequest = new URL(String.format("https://openlibrary.org/api/books?bibkeys=ISBN:%s", ISBN));
         String readLine = null;
         HttpURLConnection connection = (HttpURLConnection) urlForGetRequest.openConnection();
@@ -26,11 +26,14 @@ class APIHelper {
                 response.append(readLine);
             }
             in.close();
-            // print result
-            System.out.println("JSON String Result: " + response.toString());
+            String cleanResponse = response.toString().replaceFirst("ISBN:\\d+", "ISBN");
+            cleanResponse = cleanResponse.replaceFirst("var _OLBookInfo = ", "");
+            cleanResponse = cleanResponse.replace(";", "");
+            System.out.println(cleanResponse);
+            return cleanResponse;
             //GetAndPost.POSTRequest(response.toString());
         } else {
-            System.out.println("GET NOT WORKED");
+            throw new RuntimeException(String.format("HTTP request failed: %s", ISBN));
         }
     }
 }
