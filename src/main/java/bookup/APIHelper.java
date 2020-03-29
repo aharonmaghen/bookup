@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import com.google.gson.*;
 
 /** Provides methods for interacting with the OpenLibrary API */
 class APIHelper {
@@ -13,27 +14,29 @@ class APIHelper {
      * The data is obtained form a book API.
      */
     public static String getJson(String ISBN) throws IOException {
-        URL urlForGetRequest = new URL(String.format("https://openlibrary.org/api/books?bibkeys=ISBN:%s", ISBN));
+        URL urlForGetRequest = new URL(String.format("https://openlibrary.org/api/books?bibkeys=ISBN:%s&jscmd=data", ISBN));
         String readLine = null;
         HttpURLConnection connection = (HttpURLConnection) urlForGetRequest.openConnection();
         connection.setRequestMethod("GET");
         int responseCode = connection.getResponseCode();
 
+        StringBuilder response = new StringBuilder();
         if (responseCode == HttpURLConnection.HTTP_OK) {
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            StringBuilder response = new StringBuilder();
             while ((readLine = in.readLine()) != null) {
                 response.append(readLine);
             }
             in.close();
-            String cleanResponse = response.toString().replaceFirst("ISBN:\\d+", "ISBN");
-            cleanResponse = cleanResponse.replaceFirst("var _OLBookInfo = ", "");
-            cleanResponse = cleanResponse.replace(";", "");
-            System.out.println(cleanResponse);
-            return cleanResponse;
-            //GetAndPost.POSTRequest(response.toString());
+
+            return cleanResponse(response.toString());
         } else {
             throw new RuntimeException(String.format("HTTP request failed: %s", ISBN));
         }
+    }
+
+    private static String cleanResponse(String response) {
+            return response.replaceFirst("ISBN:\\d+", "ISBN")
+                .replaceFirst("var _OLBookInfo = ", "")
+                .replace(";", "");
     }
 }

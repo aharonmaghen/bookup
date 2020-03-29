@@ -9,51 +9,18 @@ import java.util.*;
 /** Main Bookup Application */
 class Main {
 	public static void main(String[] args) {
+		try {
 
-//		System.out.println("Success!!!!!!!!!!");
-//
-//		URL test = null;
-//		try {
-//			test = new URL("https://www.youtube.com/");
-//		} catch (MalformedURLException e) {
-//			e.printStackTrace();
-//		}
-//		System.out.println(test);
-//		try {
-//			System.out.println(test.getContent());
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		System.out.println(test.getAuthority());
-//
-//		Book book = new Book("1234567890");
-//		book.setTitle("this is a book");
-//		book.setAuthor(new Author("aharon maghen"));
-//		book.setPages(345);
-//		book.setYear(2020);
-//		try {
-//			book.setImageURL(new URL("https://www.linkedin.com/in/aharonmaghen"));
-//		} catch (MalformedURLException e) {
-//			e.printStackTrace();
-//		}
-//
-//		SQLHelper.add(book);
-//
-//		System.out.println(SQLHelper.getBook("1234567890"));
-//		System.out.println(SQLHelper.getBook("111111111"));
-//
-//		List<Book> list = SQLHelper.getAllBooks();
-//		System.out.println(list);
+			String isbn = "9781942788331";
+			String jsonResult = APIHelper.getJson(isbn);
+			System.out.println(jsonResult);
+			Gson gson = new Gson();
+			Book book = gson.fromJson(jsonResult, Book.class);
+			book.setISBN(isbn);
+			System.out.println(book.toString());
 
-	try {
-		String jsonResult = APIHelper.getJson("0307157857");
-		
-		Gson gson = new Gson();
-		Book book = gson.fromJson(jsonResult, Book.class);
-		System.out.println(book.toString());
-
-	} catch (IOException e) {
-		e.printStackTrace();
-	}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

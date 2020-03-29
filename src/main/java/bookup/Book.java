@@ -26,7 +26,7 @@ class Book {
 	}
 
 	public String getTitle() {
-		return title;
+		return isbnObject.title;
 	}
 
 	public void setTitle(String title) {
@@ -42,7 +42,7 @@ class Book {
 	}
 
 	public int getPages() {
-		return pages;
+		return isbnObject.pages;
 	}
 
 	public void setPages(int pages) {
@@ -67,13 +67,21 @@ class Book {
 
 	@Override
 	public String toString() {
-		return String.format("ISBN: %s, Title: %s, Author: %s, Pages: %s, Year: %s, Image URL: %s",
-				isbn, isbnObject.title, author, pages, year, imageURL);
+		return String.format(
+			"ISBN: %s\n"
+			+ "Title: %s\n"
+			+ "Author: %s\n"
+			+ "Pages %d\n"
+			+ "Year: %s\n"
+			+ "imageURL: %s\n",
+			getISBN(), getTitle(), getAuthor(), getPages(), getYear(), getImageURL());
 	}
 
 
 	private class IsbnObject {
 		private String title;
+		private String subtitle;
+		@SerializedName("number_of_pages") private int pages;
 	}
 
 }
