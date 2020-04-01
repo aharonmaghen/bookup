@@ -10,10 +10,8 @@ import java.util.*;
 class Main {
 	public static void main(String[] args) {
 		try {
-
 			String isbn = "9781942788331";
 			String jsonResult = APIHelper.getJson(isbn);
-			System.out.println(jsonResult);
 			Gson gson = new Gson();
 			Book book = gson.fromJson(jsonResult, Book.class);
 			book.setISBN(isbn);
