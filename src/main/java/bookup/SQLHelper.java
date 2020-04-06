@@ -11,7 +11,15 @@ class SQLHelper {
         try {
             Connection con = connect();
             Statement statement = con.createStatement();
-            String SQLAddStatement = String.format("insert into books values(%s, '%s', '%s', %s, %s, '%s');", book.getISBN(), book.getTitle(), book.getAuthor(),book.getPages(), book.getYear(), book.getImageURL());
+            String SQLAddStatement = 
+                String.format(
+                    "insert into books values(%s, '%s', '%s', %s, %s, '%s');", 
+                    book.getISBN(),
+                    book.getTitle(),
+                    Arrays.toString(book.getAuthors()),
+                    book.getPages(),
+                    book.getPublishDate(),
+                    book.getImageURL());
             statement.executeUpdate(SQLAddStatement);
             con.close();
         } catch (SQLException e) {
@@ -83,9 +91,9 @@ class SQLHelper {
             if (results.isBeforeFirst()) results.next();
             book = new Book(results.getString(1));
             book.setTitle(results.getString(2));
-            book.setAuthor(new Author(results.getString(3)));
+            book.setAuthors(getAuthorsArray(results.getString(3)));
             book.setPages(results.getInt(4));
-            book.setYear(results.getInt(5));
+            book.setPublishDate(results.getString(5));
             book.setImageURL(results.getURL(6));
         } catch (SQLException e) {
             throw new RuntimeException();
@@ -103,5 +111,15 @@ class SQLHelper {
             throw new RuntimeException();
         }
         return con;
+    }
+
+    private static Author[] getAuthorsArray(String authorString) {
+        authorString = authorString.replace("[\\[\\]]", "");
+        String[] stringAuthors = authorString.split(",");
+        Author[] newAuthors = new Author[stringAuthors.length];
+        for (int i = 0; i < stringAuthors.length; i++) {
+            newAuthors[i] = new Author(stringAuthors[i]);
+        }
+        return newAuthors;
     }
 }

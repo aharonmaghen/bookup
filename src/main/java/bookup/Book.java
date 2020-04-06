@@ -1,13 +1,18 @@
 package bookup;
+
+import com.google.gson.annotations.SerializedName;
 import java.net.URL;
+import java.net.MalformedURLException;
+import java.util.Arrays;
 
 /** Represents a single Book */
 class Book {
+	@SerializedName("ISBN") private IsbnObject isbnObject;
 	private String isbn;
 	private String title;
-	private Author author;
-	private int pages;
-	private int year;
+	private Author[] authors;
+	private int pages;	
+	private String publishDate;
 	private URL imageURL;
 
 	public Book(String isbn) {
@@ -23,39 +28,43 @@ class Book {
 	}
 
 	public String getTitle() {
-		return title;
+		return isbnObject.title;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
-	public Author getAuthor() {
-		return author;
+	public Author[] getAuthors() {
+		return isbnObject.authors;
 	}
 
-	public void setAuthor(Author author) {
-		this.author = author;
+	public void setAuthors(Author[] authors) {
+		this.authors = authors;
 	}
 
 	public int getPages() {
-		return pages;
+		return isbnObject.pages;
 	}
 
 	public void setPages(int pages) {
 		this.pages = pages;
 	}
 
-	public int getYear() {
-		return year;
+	public String getPublishDate() {
+		return isbnObject.publishDate;
 	}
 
-	public void setYear(int year) {
-		this.year = year;
+	public void setPublishDate(String publishDate) {
+		this.publishDate = publishDate;
 	}
 
 	public URL getImageURL() {
-		return imageURL;
+		try {
+			return new URL(isbnObject.cover.imageUrl);
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public void setImageURL(URL url) {
@@ -64,8 +73,28 @@ class Book {
 
 	@Override
 	public String toString() {
-		return String.format("ISBN: %s, Title: %s, Author: %s, Pages: %s, Year: %s, Image URL: %s",
-				isbn, title, author, pages, year, imageURL);
+		return String.format(
+			"ISBN: %s\n"
+			+ "Title: %s\n"
+			+ "Author: %s\n"
+			+ "Pages %d\n"
+			+ "Publish date: %s\n"
+			+ "imageURL: %s\n",
+			getISBN(), getTitle(), Arrays.toString(getAuthors()), getPages(), getPublishDate(), getImageURL());
+	}
+
+
+	private class IsbnObject {
+		@SerializedName("number_of_pages") private int pages;
+		@SerializedName("authors") private Author[] authors;
+		@SerializedName("publish_date") private String publishDate;
+		private String title;
+		private String subtitle;
+		private Cover cover;
+	}
+
+	private class Cover {
+		@SerializedName("large") private String imageUrl;
 	}
 
 }
