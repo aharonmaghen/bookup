@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	
+	<title>Book Info</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+
+<body>
+
+	<p th:text="'ISBN: ' + ${book.getISBN()}"/>
+	<p th:text="'TITLE: ' + ${book.getTitle()}"/>
+	<p th:text="'AUTHORS: ' + ${book.getAuthorsString()}"/>
+	<img th:src="${book.getImageURL()}">
+	<!-- <h1>here i will display book info</h1> -->
+
+</body>
+</html>

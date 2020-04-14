@@ -1,2 +1,4 @@
-var createtextbox = document.createElement("INPUT");
-createtextbox.setAttribute("type", "text");
+function getIsbn() {
+  var isbn = document.getElementById("isbn").value;
+  document.getElementById("displayIsbn").innerHTML = isbn;
+}
