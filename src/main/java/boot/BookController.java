@@ -21,7 +21,7 @@ public class BookController {
 	}
 
 	@GetMapping("/bookInfo")
-	public String test(@RequestParam(name="isbn", required=true) String isbn, Model model) {
+	public String bookInfo(@RequestParam(name="isbn", required=true) String isbn, Model model) {
 		String jsonResult = null;
 		try {
 			jsonResult = APIHelper.getJson(isbn);
@@ -35,6 +35,12 @@ public class BookController {
 		model.addAttribute("book", book);
 
 		return "bookInfo";
+	}
+
+	@GetMapping("/addBookToDB")
+	public String addBookToDB() {
+
+		return "home";
 	}
 
 }
