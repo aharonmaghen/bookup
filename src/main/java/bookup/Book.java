@@ -39,6 +39,10 @@ public class Book {
 		return isbnObject.authors;
 	}
 
+	public String getAuthorsString() {
+		return Arrays.toString(isbnObject.authors);
+	}
+
 	public void setAuthors(Author[] authors) {
 		this.authors = authors;
 	}
