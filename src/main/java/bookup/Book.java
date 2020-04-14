@@ -6,7 +6,7 @@ import java.net.MalformedURLException;
 import java.util.Arrays;
 
 /** Represents a single Book */
-class Book {
+public class Book {
 	@SerializedName("ISBN") private IsbnObject isbnObject;
 	private String isbn;
 	private String title;

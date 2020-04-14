@@ -1,4 +1,4 @@
-package com.boot;
+package boot;
 
 import java.util.Arrays;
 
@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationContext;
 public class BootApplication {
 
 	public static void main(String[] args) {
-		ApplicationContext ctx = SpringApplication.run(BootApplication.class, args);
+		SpringApplication.run(BootApplication.class, args);
 
 		System.out.println("Running...");
 	}

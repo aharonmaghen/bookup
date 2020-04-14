@@ -1,14 +1,23 @@
-package com.boot;
+package boot;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import bookup.APIHelper;
+import bookup.Book;
+import com.google.gson.Gson;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-@RestController
+import java.io.IOException;
+import java.util.Arrays;
+
+@Controller
 public class BookController {
 
-	@RequestMapping("/")
-	public String index() {
-		return "<h1>Welcome to bookup</h1>";
+	@GetMapping("/welcome")
+	public String welcome(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+		model.addAttribute("name", name);
+		return "welcome";
 	}
 
 }

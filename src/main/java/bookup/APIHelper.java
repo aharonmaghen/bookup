@@ -5,10 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import com.google.gson.*;
 
 /** Provides methods for interacting with the OpenLibrary API */
-class APIHelper {
+public class APIHelper {
 
     /** Returns a Book object with data of the book specified by the ISBN.
      * The data is obtained form a book API.
