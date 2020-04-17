@@ -11,14 +11,14 @@
 
 	<form action="addBookToDB">
 		<label for="confirm">CLICK SUBMIT TO CONFIRM BOOK</label><br>
-		<input type="submit" name="confirm" id="confirm">
+		<input type="hidden" name="isbn" th:value="${book.getISBN()}" id="confirm"/>
+		<input type="submit">
 	</form>
 
 	<p th:text="'ISBN: ' + ${book.getISBN()}"/>
 	<p th:text="'TITLE: ' + ${book.getTitle()}"/>
 	<p th:text="'AUTHORS: ' + ${book.getAuthorsString()}"/>
 	<img th:src="${book.getImageURL()}" width="250">
-	<!-- <h1>here i will display book info</h1> -->
 
 </body>
 </html>
