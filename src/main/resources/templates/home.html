@@ -1,21 +1,23 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
+	<link href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400;500&display=swap" rel="stylesheet">
 	<title>Bookup</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="application.css">
 
 </head>
 <body>
+	<div class="content" id="bookupForm">
+		<form action="bookInfo">
+			<label for="isbn" id="isbnLabel">Enter ISBN:</label><br>
+			<input type="text" name="isbn" id="isbn" required><br>
+			<input type="submit" id="submit">
+		</form>
+	</div>
 
-	<form action="bookInfo">
-		<label for="isbn">Enter ISBN:</label><br>
-		<input type="text" name="isbn" id="isbn" required><br>
-		<input type="submit">
-	</form>
-	<div th:if="${message != null}" style="color:blue">
+	<div th:if="${message != null}" style="color:blue" id="messageBox">
 		<h1 th:text="${message}"></h1>
 	</div>
-	
 </body>
 </html>
