@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	
+	<title>Book Info</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+
+<body>
+
+	<form action="addBookToDB">
+		<label for="confirm">CLICK SUBMIT TO CONFIRM BOOK</label><br>
+		<input type="hidden" name="isbn" th:value="${book.getISBN()}" id="confirm"/>
+		<input type="submit">
+	</form>
+
+	<p th:text="'ISBN: ' + ${book.getISBN()}"/>
+	<p th:text="'TITLE: ' + ${book.getTitle()}"/>
+	<p th:text="'AUTHORS: ' + ${book.getAuthorsString()}"/>
+	<img th:src="${book.getImageURL()}" width="250">
+
+</body>
+</html>

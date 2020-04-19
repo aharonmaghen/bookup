@@ -14,7 +14,7 @@ public class APIHelper {
      */
     public static String getJson(String ISBN) throws IOException {
         URL urlForGetRequest = new URL(String.format("https://openlibrary.org/api/books?bibkeys=ISBN:%s&jscmd=data", ISBN));
-        String readLine = null;
+        String readLine;
         HttpURLConnection connection = (HttpURLConnection) urlForGetRequest.openConnection();
         connection.setRequestMethod("GET");
         int responseCode = connection.getResponseCode();

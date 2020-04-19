@@ -39,6 +39,10 @@ public class Book {
 		return isbnObject.authors;
 	}
 
+	public String getAuthorsString() {
+		return Arrays.toString(isbnObject.authors);
+	}
+
 	public void setAuthors(Author[] authors) {
 		this.authors = authors;
 	}
@@ -60,6 +64,9 @@ public class Book {
 	}
 
 	public URL getImageURL() {
+		if (isbnObject.cover == null) {
+			return null;
+		}
 		try {
 			return new URL(isbnObject.cover.imageUrl);
 		} catch (MalformedURLException e) {
@@ -93,7 +100,7 @@ public class Book {
 		private Cover cover;
 	}
 
-	private class Cover {
+	private static class Cover {
 		@SerializedName("large") private String imageUrl;
 	}
 
