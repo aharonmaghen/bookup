@@ -7,26 +7,22 @@ import java.util.*;
 public class SQLHelper {
 
     /** Adds specified book to database */
-    public static void add(Book book) {
-        try {
-            Connection con = connect();
-            Statement statement = con.createStatement();
-            String SQLAddStatement =
-                String.format(
-                    "insert into books values('%s', '%s', '%s', %s, '%s', '%s', %d, '%s');",
-                    book.getISBN(),
-                    book.getTitle(),
-                    Arrays.toString(book.getAuthors()),
-                    book.getPages(),
-                    book.getPublishDate(),
-                    book.getImageURL(),
-                    7,
-                    "unlisted");
-            statement.executeUpdate(SQLAddStatement);
-            con.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public static void add(Book book) throws SQLException {
+        Connection con = connect();
+        Statement statement = con.createStatement();
+        String SQLAddStatement =
+            String.format(
+                "insert into books values('%s', '%s', '%s', %s, '%s', '%s', %d, '%s');",
+                book.getISBN(),
+                book.getTitle(),
+                Arrays.toString(book.getAuthors()),
+                book.getPages(),
+                book.getPublishDate(),
+                book.getImageURL(),
+                7,
+                "unlisted");
+        statement.executeUpdate(SQLAddStatement);
+        con.close();
     }
 
     /** Returns a Book with the specified isbn or null if the book does not exist in the database */

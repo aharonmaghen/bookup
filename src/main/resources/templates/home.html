@@ -4,7 +4,7 @@
 
 	<title>Bookup</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	
+
 </head>
 <body>
 
@@ -13,6 +13,9 @@
 		<input type="text" name="isbn" id="isbn" required><br>
 		<input type="submit">
 	</form>
+	<div th:if="${message != null}" style="color:blue">
+		<h1 th:text="${message}"></h1>
+	</div>
 	
 </body>
 </html>
