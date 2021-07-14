@@ -1,3 +1,25 @@
 body {
-    background-color: lightblue;
+  text-align: center;
+  font-family: 'Baloo Paaji 2', cursive;
+}
+
+#bookupForm #isbnLabel {
+  font-size: 2em;
+}
+
+#bookupForm #isbn {
+    width: 80vw;
+    text-align: center;
+    font-size: 2em;
+    border: none;
+    border-bottom: 2px solid black;
+}
+
+#bookupForm #submit {
+  height: 40px;
+  width: 100px;
+}
+
+#messageBox {
+  
 }
